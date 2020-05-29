@@ -1,0 +1,44 @@
+import csv
+from matplotlib import pyplot as plt
+import numpy as np
+from collections import Counter
+import pandas as pd
+
+# ------ Using Standard library with CSV -----------------
+# We need to clean up or analyze data before we are able to plot it
+with open('data.csv') as csv_file:
+    csv_reader = csv.DictReader(csv_file)
+    # Built-in class
+    language_counter = Counter()
+    for row in csv_reader:
+        language_counter.update(row["LanguagesWorkedWith"].split(';'))
+
+# ---------- Using Pandas library -----------------------------
+# language_counter = Counter()
+# data = pd.read_csv('data.csv')
+# lang_id = data['LanguagesWorkedWith']
+# ls = []
+# for item in lang_id:
+#     language_counter.update(item.split(';'))
+
+
+languages = []  # Create an empty list for most common languages
+popularity = []  # Create an empty list to store the number of most common used languages
+
+for lang, num in language_counter.most_common(15):
+    languages.append(lang)
+    popularity.append(num)
+
+languages.reverse()
+popularity.reverse()
+
+plt.style.use("seaborn-whitegrid")
+
+# When have a lot of items it is hard to see all of items so we can use horizontal bar chart instead of the vertical one
+plt.barh(languages, popularity)
+
+plt.title('Most Popular Languages')
+plt.ylabel('Programming languages')
+plt.xlabel('The Number Of People Who Use')
+
+plt.show()
