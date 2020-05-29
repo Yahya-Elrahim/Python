@@ -1,1 +1,39 @@
 # Bar Charts in matplotlib
+from matplotlib import pyplot as plt
+import numpy as np
+
+# The bars are positioned at x with the given alignment. Their dimensions are given by width and height. The vertical
+# baseline is bottom (default 0).
+# Each of x, height, width, and bottom may either be a scalar applying to all bars, or it may be a sequence of length
+# N providing a separate value for each bar. X-axis values
+ages = np.linspace(25, 50, num=11)
+x_index = np.arange(len(ages))
+width = 0.25
+plt.style.use("seaborn-whitegrid")
+# Y-axis values
+# Median All Developer Salaries by Age
+dev_y = [38496, 42000, 46752, 49320, 53200,
+         56000, 62316, 64928, 67317, 68748, 73752]
+# Median Java Developer Salaries by Age
+java_y = [37810, 43515, 46823, 49293, 53437,
+          56373, 62375, 66674, 68745, 68746, 74583]
+
+# Median Python Developer Salaries by Age
+python_y = [45372, 48876, 53850, 57287, 63016,
+            65998, 70003, 70000, 71496, 75370, 83640]
+
+plt.bar(x_index - width, dev_y, width=width, color="g", label="All developers")
+
+plt.bar(x_index + width, java_y, width=width, color="c", label="Java")
+
+plt.bar(x_index, python_y, width=width, color="#e5ae38", label="Python")
+
+plt.title("Median Salary (USD) by Ages")
+plt.xlabel("Ages")
+plt.ylabel("Median Salary (USD)")
+
+# Ticks are the values used to show specific points on the coordinate axis. It can be a number or a string
+plt.xticks(ticks=x_index, labels=ages)
+
+plt.legend()
+plt.show()
