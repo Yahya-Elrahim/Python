@@ -49,3 +49,5 @@ if __name__ == '__main__':
     binary_search = BinarySearch(array, 111, 0, len(array) - 1)
     result = binary_search.binary_search()
     print(result)
+    
+# The time complexity of above algorithm is O(logn).
